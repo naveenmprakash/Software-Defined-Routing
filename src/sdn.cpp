@@ -64,10 +64,7 @@ struct timeval interval;
 };
 
 struct timer t;
-
-
 vector <struct timer> mul_timer;
-
 
 struct controlmessage
 {
@@ -291,10 +288,6 @@ struct datapacket dp;
 
 	if(flag==true) return i ;  //position
 	else if(flag==false)return -1;
-
-
-		
-	
 	}		
 
 	//Bellman Ford Algorithm to calculate the minimum cost path to all the routers in the network
@@ -325,8 +318,6 @@ struct datapacket dp;
 	if( cost< min_cost )
 	{
 
-	
-		
 		min_cost=cost;
 
 		next_hop=vneighbor[n].id;
@@ -351,11 +342,7 @@ vdv[mypos].vrt[j].next_hop=65535;
 
 }
 
-
-
 }
-
-
 
 }
 
@@ -384,9 +371,7 @@ void build_forwarding_table()
 
 		}
 
-
 	}
-
 
 
 //Helper function to find next hop of any given router
@@ -436,10 +421,6 @@ sockets_connected.push_back(next_hop_socket);
 
 return next_hop_socket;
 
-
-
-
-
 }
 
 
@@ -471,9 +452,7 @@ if(vcp[i].router_id==vforward[j].dest) break;
 
 return vforward[j].next_hop;
 
-
 }
-
 
 //Helper function to receive all the bytes that has being sent
         
@@ -523,9 +502,7 @@ int sendALL(int sock_index, unsigned char *buffer, int nbytes)
 
         return b;
 
-
 	}
-
 
 	//Sends Periodic Routing Updates to its neighbors
 	void sendupdates( int udp_socket )
@@ -547,11 +524,7 @@ int sendALL(int sock_index, unsigned char *buffer, int nbytes)
 		
 		int len=8,s;
 
-
 			int mypos=findpos(my_id); 
-
-	
-
 
 		for(int r=0;r<dv.vrt.size(); ++r)
 		{
@@ -644,10 +617,7 @@ int sendALL(int sock_index, unsigned char *buffer, int nbytes)
         fprintf(stderr," %s", gai_strerror(addr));
 
         }
-
-
 	
-		
 	for(p = servinfo; p != NULL; p = p->ai_next) {
         if ((data_socket = socket(p->ai_family, p->ai_socktype,
                 p->ai_protocol)) == -1) {
@@ -692,17 +662,9 @@ cout<<"Listening for incoming conn on data  port "<<dataport ;
 	
 	fdmax=data_socket;
 
-
-
-
 	}
 
 //**************** TAKEN FROM BEEJ GUIDE***********************
-
-
-
-
-
 
 
 //************ CONNECTION ESTABLISHMENT,SOCKET CREATION, AND BASIC SELECT LOOP IN THE FUNCTION BELOW REFERENCED  FROM BEEJ GUIDE AND MY  PA1
@@ -777,8 +739,6 @@ else
 cout<<"Listening for incoming conn on control port "<<cport;
 }
 
-
-
 	//Maintain a list of timers in a list for which updates are to be sent. 
 
 	struct timeval begin,end,diff,timediff;
@@ -793,9 +753,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 	struct timeval min;
 	min.tv_sec=1.0;
 	min.tv_usec=1.0;
-
-
-	
 
 	printf("Initial timer %ld.%06ld " ,tv.tv_sec); cout<<flush;
 
@@ -824,9 +781,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 	
 		uint16_t last_set_id;
 		int l,k;
-	
-		
-
 
 		for( l=0;l<mul_timer.size();l++)
 		{
@@ -871,9 +825,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 	
 		}
 
-
-	
-	
 		 if(min.tv_sec<0)
 		{
 		min.tv_sec=0.1;	
@@ -885,9 +836,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 		
 		printf("After timer updation %ld.%06ld ", tv.tv_sec);
 		
-
-		
-
 			if(selret==-1)
 			{	perror("Select failed");  }
 
@@ -922,9 +870,7 @@ cout<<"Listening for incoming conn on control port "<<cport;
 
 			}
 
-			}
-
-				
+			}			
 			
 			}
 
@@ -966,11 +912,8 @@ cout<<"Listening for incoming conn on control port "<<cport;
 
 				vlink[npos].cost=65535; vlink[npos].id=65535;
 				}
-			
-		
-					
+						
 				}
-
           
 	}
 
@@ -1002,12 +945,8 @@ cout<<"Listening for incoming conn on control port "<<cport;
 	
 	}
 
-
-       
-
                         }  //end of selret==0  
 
-	
 			else
 			{
 				
@@ -1081,12 +1020,7 @@ cout<<"Listening for incoming conn on control port "<<cport;
 						
 						getpeername(data_socket,(struct sockaddr*)&client_addr,&client_addrlen);
 							
-					
-
-
 						}
-
-
 						}
 				
 						else if(sock_index==udp_socket)  
@@ -1115,11 +1049,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 								
 						int po=findpos(vdv[i].id);    // position of the router who sent the update in my dv 
 
-     	
-
-						
-	
-			
 
 					for(l=0;l<mul_timer.size();l++)
 					{
@@ -1157,12 +1086,9 @@ cout<<"Listening for incoming conn on control port "<<cport;
 						uint16_t pad=msg[z] <<8 | msg[z+1] ; z+=2;
 						vdv[po].vrt[j].router_id= msg[z] << 8 | msg[z+1]; z+=2;
 						vdv[po].vrt[j].cost=msg[z]<< 8 | msg[z+1]; z+=2;
-				
-						
+										
 }
 		
-
-			
 						}       
 						else
 
@@ -1344,11 +1270,7 @@ cout<<"Listening for incoming conn on control port "<<cport;
 							vdv.push_back(dv);      //adding to vector dvbyid containing id and respective distance vector	
 									
 					}
-					
-								
-								
-									
-				
+			
 							memset(buffer,0,sizeof(buffer));
 							 n=0;
 							buffer=generate_control_response(l,cm->con_code,n);
@@ -1374,10 +1296,8 @@ cout<<"Listening for incoming conn on control port "<<cport;
 							break;
 
 						
-
 							case 2:  // Routing Table
 
-						
 							memset(buffer,0,sizeof(buffer));
 						
 							n=8*nodes;
@@ -1430,11 +1350,7 @@ cout<<"Listening for incoming conn on control port "<<cport;
 						if(uid==vneighbor[i].id) break;
 						
 						}
-
-
 						vneighbor[i].cost=ucost;
-
-
 
 					 for(j=0;j<vlink.size();j++)
                                                 {
@@ -1445,10 +1361,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 
 
                                                 vlink[j].cost=ucost;
-
-
-						
-
 						memset(buffer,0,sizeof(buffer));
 
 						buffer=generate_control_response(l,cm->con_code,0);
@@ -1456,8 +1368,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 
 						
 						break;
-
-
 
 						case 4:  //Crash
 
@@ -1489,9 +1399,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 						}
 					
 						
-						
-										
-
 	
 						cout<<"FIlename is "<<sf.filename;
 
@@ -1513,8 +1420,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 	
 						}
 
-
-
 						cout<<"\nThe ip of next hop is "<<(unsigned int)next_hop_ip;
 
 						
@@ -1530,9 +1435,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 
 						if(data_sock1>fdmax) fdmax=data_sock1;
 						vdata.push_back(data_sock1);							
-						
-					
-							
 					
 						x=0;
 
@@ -1588,9 +1490,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 						memcpy(penultimate,sendbuffer,1036);
 						}
 									
-
-	
-
 						else if(bytesread>0 && i==fragments)
 						{
 					
@@ -1619,21 +1518,9 @@ cout<<"Listening for incoming conn on control port "<<cport;
 					}
 
 
-
-
-				
-
-
 					}
 
-
-
-
-						
-
-						
-							
-											
+					
 					
 						bzero(&st,sizeof(st));
 
@@ -1659,8 +1546,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 						
 						break;
 	
-						
-						
 							
 						case 6: //sendfile stats
 					
@@ -1670,9 +1555,7 @@ cout<<"Listening for incoming conn on control port "<<cport;
 						memset(buffer,0,sizeof(buffer));
 						s=recvALL(sock_index,buffer,1);
 						stats_tid=buffer[0];
-
-						
-										
+				
 						
 						for(i=0;i<vsend_stats.size();i++)
 						{
@@ -1681,8 +1564,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 
 
 						} 
-
-
 						
 						memset(buffer1,0,sizeof(buffer1));
 
@@ -1692,7 +1573,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 						buffer1[3]=0 & (0xFF);
 						
 						
-
 					        //cout<<"vsend stats.tid is"<<(unsigned int)vsend_stats[i].tid<<"Size of vectors is"<<vsend_stats[i].seq.size()<<flush;
 						plen=0;
 						memset(buffer,0,sizeof(buffer));
@@ -1719,12 +1599,10 @@ cout<<"Listening for incoming conn on control port "<<cport;
 						s=sendALL(sock_index,buffer,plen); 		
 						memset(buffer,0,sizeof(buffer)); 
 						plen=0;
-                                		               
+                          	               
 				
 			 		 }		
 							
-						
-
 				
 						}    
 
@@ -1764,9 +1642,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 					
 					cout<<"\nGot a new request for sending data";	
 					      
-					
-				
-					
 										
 					cout<<"Inside recv"<<flush;
 
@@ -1785,10 +1660,7 @@ cout<<"Listening for incoming conn on control port "<<cport;
 
 					if(fpwrite!=NULL)  fclose(fpwrite);
 			
-				
-
-
-
+			
 					}                                    
                                         
 
@@ -1899,20 +1771,13 @@ cout<<"Listening for incoming conn on control port "<<cport;
 				if(find(existing.begin(),existing.end(),dp.tid)!=existing.end())
 				{
 
-
-				
-
                                   ds=sendALL(data_sock2,sendbuffer,1036);
-
 
 				}
 
 
 
 					else
-
-
-
 					{
 
 
@@ -1933,9 +1798,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 
                                        }
 
-
-
-
 					cout<<"\nThe ip of next hop is "<<(unsigned int)next_hop_ip;
 
 
@@ -1951,8 +1813,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
                           		existing.push_back(dp.tid);
 					ds=sendALL(data_sock2,sendbuffer,1036);
 
-					
-
 						}
 
 
@@ -1967,16 +1827,6 @@ cout<<"Listening for incoming conn on control port "<<cport;
 						
 				  } //route the packet
 					
-
-
-			
-                                        
-                                             
-
-
-
-			
-
 					}  //ttl>0
 
 					
