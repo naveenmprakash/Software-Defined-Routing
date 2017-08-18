@@ -1,0 +1,9 @@
+A Simplified SND Model in C++, separating the control plane and data plance of the router. The routers on the network provide periodic routing updates to all other neighbors through Distance Vector Routing Protocol.  The controller orchestrates the file transfer through the best possible route calculated through the Distance Vector Algorithm. 
+
+The functionalities include :
+
+1) File Transfer through the best possible route in the network
+2) Network Convergence 
+3) Periodic Distance Vector Updates to all the neighboring routers
+4) Responding to Controller codes with appropriate responses
+5) Ability to handle router failure and path cost changes in any part of the network
